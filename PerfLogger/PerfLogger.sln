@@ -2,6 +2,8 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PerfLogger", "PerfLogger\PerfLogger.csproj", "{DB5ED6AF-A179-4F83-BE93-FD94464B82DD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PerfLoggerTest", "PerfLoggerTest\PerfLoggerTest.csproj", "{1067D8EC-B01C-464E-B8CC-789557327DC6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +14,9 @@ Global
 		{DB5ED6AF-A179-4F83-BE93-FD94464B82DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DB5ED6AF-A179-4F83-BE93-FD94464B82DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DB5ED6AF-A179-4F83-BE93-FD94464B82DD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1067D8EC-B01C-464E-B8CC-789557327DC6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1067D8EC-B01C-464E-B8CC-789557327DC6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1067D8EC-B01C-464E-B8CC-789557327DC6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1067D8EC-B01C-464E-B8CC-789557327DC6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

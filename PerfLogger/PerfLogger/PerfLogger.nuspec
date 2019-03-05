@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<package>
+  <metadata>
+    <id>NestedPerfLogger</id>
+    <version>1.0.0</version>
+    <title>Nested Performance Logger</title>
+    <authors>Sivaramasundar D</authors>
+    <owners>Sivaramasundar D</owners>
+    <licenseUrl>https://github.com/sundarsrd/NestedPerfLogger.net/blob/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/sundarsrd/NestedPerfLogger.net</projectUrl>
+    <!--iconUrl>http://ICON_URL_HERE_OR_DELETE_THIS_LINE</iconUrl-->
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>A simple yet swiss knife of a logger to measure performance in a realtime and nested manner (i.e.,) to identify the bottlenecks quickly.
+    </description>
+    <releaseNotes>Summary of changes made in this release of the package.</releaseNotes>
+    <copyright>Copyright 2019</copyright>
+    <tags>Logger Performance C# .Net</tags>
+  </metadata>
+</package>
