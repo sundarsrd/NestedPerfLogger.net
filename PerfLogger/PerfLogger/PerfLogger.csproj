@@ -32,10 +32,6 @@
         <WarningLevel>4</WarningLevel>
     </PropertyGroup>
     <ItemGroup>
-        <Reference Include="PerfLogger, Version=1.0.0.1, Culture=neutral, PublicKeyToken=null">
-          <HintPath>..\packages\NestedPerfLogger.1.0.1\lib\PerfLogger.dll</HintPath>
-          <Private>True</Private>
-        </Reference>
         <Reference Include="System" />
         <Reference Include="System.Core" />
         <Reference Include="System.Data" />
@@ -48,6 +44,7 @@
     <ItemGroup>
       <Content Include="NestedPerfLogger.1.0.0.nupkg" />
       <Content Include="PerfLogger.nuspec" />
+      <Content Include="README.md" />
     </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
     <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

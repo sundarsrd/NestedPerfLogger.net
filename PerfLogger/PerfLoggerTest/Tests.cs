@@ -39,6 +39,13 @@ namespace PerfLoggerTest
             Console.Out.WriteLine(perfLogger.StopMeasure("done - Shoe"));
             Console.Out.WriteLine(new string('=', 80));            
             //
+            Console.Out.WriteLine(perfLogger.StartMeasure("NestedLevelCheck", "Node-Nested",1));
+            Console.Out.WriteLine(perfLogger.StartMeasure("NestedLevelCheck", "Node-Nested",1));
+            Console.Out.WriteLine(perfLogger.StartMeasure("NestedLevelCheck", "Node-Nested",1));
+            Console.Out.WriteLine(perfLogger.StartMeasure("NestedLevelCheck", "Node-Nested",1));
+            Console.Out.WriteLine(perfLogger.StartMeasure("NestedLevelCheck", "Node-Nested",1));
+            Console.Out.WriteLine(perfLogger.StartMeasure("NestedLevelCheck", "Node-Nested",1));
+            //
             Assert.True(String.Equals(perfLogger.LogHeaders(),"TimeStamp,Level Indicator,Level,Key,Action,Elapsed Time,Log Message,Data",StringComparison.InvariantCultureIgnoreCase));
         }
     }

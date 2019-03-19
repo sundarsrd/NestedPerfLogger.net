@@ -38,8 +38,8 @@
           <HintPath>..\packages\NUnit.3.11.0\lib\net45\nunit.framework.dll</HintPath>
           <Private>True</Private>
         </Reference>
-        <Reference Include="PerfLogger, Version=1.0.0.1, Culture=neutral, PublicKeyToken=null">
-          <HintPath>..\packages\NestedPerfLogger.1.0.1\lib\PerfLogger.dll</HintPath>
+        <Reference Include="PerfLogger, Version=1.0.2.0, Culture=neutral, PublicKeyToken=null">
+          <HintPath>..\packages\NestedPerfLogger.1.0.2\lib\net461\PerfLogger.dll</HintPath>
           <Private>True</Private>
         </Reference>
         <Reference Include="System" />

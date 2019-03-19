@@ -2,7 +2,7 @@
 <package>
   <metadata>
     <id>NestedPerfLogger</id>
-    <version>1.0.0</version>
+    <version>1.0.2</version>
     <title>Nested Performance Logger</title>
     <authors>Sivaramasundar D</authors>
     <owners>Sivaramasundar D</owners>

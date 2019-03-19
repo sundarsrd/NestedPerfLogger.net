@@ -80,8 +80,8 @@ namespace PerfLogger
                         _config.DoLogMeasure),
                     // Log message and data are always enclosed in quotes to help better parsing
                     InternalGetStringOnCondition(logMessage, _config.DoLogMessage),
-                    InternalGetStringOnCondition("\"" + string.Join(_config.DataDelimiter, peThis.Value.Data) + "\"",
-                        _config.DoLogData && peThis.Value.Data != null)
+                    InternalGetStringOnCondition("\"" + string.Join(_config.DataDelimiter, peThis.Value?.Data) + "\"",
+                        _config.DoLogData && peThis.Value?.Data != null)
                 );
                 //
                 result = msgOutput;
@@ -97,11 +97,11 @@ namespace PerfLogger
         {
             return string.Join(_config.Delimiter,
                 // Timestamp with milliseconds
-                InternalGetStringOnCondition(DateTime.Now.ToString("hh.mm.ss.fff")),
+                InternalGetStringOnCondition(DateTime.Now.ToString("hh.mm.ss.fff"), _config.DoLogTime),
                 // Nested Levels as a visual form : ex-> "->, -->, --->"
-                InternalGetStringOnCondition(new string('-', _perfStack.Count) + ">"),
+                InternalGetStringOnCondition(new string('-', _perfStack.Count) + ">", _config.DoLogLevelIndicator),
                 // Nested level in number : ex: 1, 2, 3 ...
-                InternalGetStringOnCondition($"{_perfStack.Count:D4}", _perfStack.Count > 0)
+                InternalGetStringOnCondition($"{_perfStack.Count:D4}", _perfStack.Count > 0 && _config.DoLogLevel)
             );
         }
 
@@ -113,18 +113,25 @@ namespace PerfLogger
         /// <returns></returns>
         public string StartMeasure(string key = "", string logMessage = "", params object[] args)
         {
-            // Create a unique key concatinating the parent key using a namespaced
-            var result =
-                _perfStack.Count > 0
-                    ? InternalGetStringOnCondition(_perfStack.Peek().Key + _config.NsDelimiter + key)
-                    : string.IsNullOrEmpty(key)
-                        ? TicksToMS()
-                        : key;
+            var result = "";
+            // Make sure we don't nest too much
+            if(_perfStack.Count < _config.MaxNestedLevels) {
+                // Create a unique key concatinating the parent key using a namespaced
+                result =
+                    _perfStack.Count > 0
+                        ? InternalGetStringOnCondition(_perfStack.Peek().Key + _config.NsDelimiter + key)
+                        : string.IsNullOrEmpty(key)
+                            ? TicksToMS()
+                            : key;
 
-            var peThis = new KeyValuePair<string, PerfEntry>(result, new PerfEntry(args));
-            //
-            _perfStack.Push(peThis);
-            result = InternalLog(peThis, "Start", logMessage);
+                var peThis = new KeyValuePair<string, PerfEntry>(result, new PerfEntry(args));
+                //
+                _perfStack.Push(peThis);
+                result = InternalLog(peThis, "Start", logMessage);
+            }
+            else
+                // Force a failure, to refactor the code
+                throw new Exception("Nested levels > " + _config.MaxNestedLevels.ToString() + "! Refactor the code or Increase MaxNestedLevels");
             //
             return result;
         }
@@ -248,7 +255,7 @@ namespace PerfLogger
 
             /// <summary>
             /// </summary>
-            public bool DoLogIndicator { get; set; }
+            public bool DoLogLevelIndicator { get; set; }
 
             /// <summary>
             /// </summary>
@@ -281,7 +288,11 @@ namespace PerfLogger
             /// <summary>
             /// </summary>
             public bool FixedColumns { get; set; }
-
+            
+            /// <summary>
+            /// </summary>
+            public int MaxNestedLevels { get; set; }
+            
             /// <summary>
             /// </summary>
             /// <param name="doLogTime"></param>
@@ -295,14 +306,15 @@ namespace PerfLogger
             /// <param name="dataDelimiter"></param>
             /// <param name="nsDelimiter"></param>
             /// <param name="fixedColumns"></param>
+            /// <param name="maxNestedLevels"></param>
             public void Configure(bool doLogTime = false, bool doLogLevel = false, bool doLogIndicator = false,
                 bool doLogAction = false, bool doLogMeasure = false, bool doLogMessage = false,
                 bool doLogData = false, string deLimiter = ",", string dataDelimiter = "|", string nsDelimiter = ".",
-                bool fixedColumns = false)
+                bool fixedColumns = false, int maxNestedLevels = 20)
             {
                 DoLogTime = doLogTime;
                 DoLogLevel = doLogLevel;
-                DoLogIndicator = doLogIndicator;
+                DoLogLevelIndicator = doLogIndicator;
                 DoLogAction = doLogAction;
                 DoLogMeasure = doLogMeasure;
                 DoLogMessage = doLogMessage;
@@ -311,6 +323,7 @@ namespace PerfLogger
                 DataDelimiter = dataDelimiter;
                 NsDelimiter = nsDelimiter;
                 FixedColumns = fixedColumns;
+                MaxNestedLevels = maxNestedLevels;
             }
         }
 
